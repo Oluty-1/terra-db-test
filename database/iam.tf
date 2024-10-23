@@ -1,5 +1,5 @@
 resource "aws_iam_role" "backup_role" {
-  name = "${var.project_name}-${var.environment}-backup-role"
+  name = "terra-backup-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"

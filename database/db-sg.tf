@@ -1,30 +1,17 @@
-
-resource "aws_security_group" "db_sg" {
-  name        = "${var.project_name}-${var.environment}-aurora-sg"
-  description = "Security group for Aurora cluster"
-  vpc_id      = var.vpc_id
+resource "aws_security_group" "rds" {
+  name        = "rds-security-group"
+  description = "Security group for RDS instance"
+  vpc_id      = module.vpc.vpc_id
 
   ingress {
-    description = "Allow MySQL traffic from VPC"
-    from_port   = 3306
+    from_port   = 3306 
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = [var.vpc_cidr]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = module.vpc.private_subnets_cidr_blocks
   }
 
   tags = {
-    Name        = "${var.project_name}-${var.environment}-aurora-sg"
+    Name        = "rds-sg"
     Environment = var.environment
   }
-}
-
-data "aws_availability_zones" "available" {
-  state = "available"
 }

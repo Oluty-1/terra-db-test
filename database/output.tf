@@ -1,21 +1,14 @@
-# database/outputs.tf
-
-output "cluster_endpoint" {
-  description = "The cluster endpoint"
-  value       = aws_rds_cluster.aurora.endpoint
+output "rds_endpoint" {
+  description = "The RDS endpoint"
+  value       = aws_rds_cluster.main.endpoint
 }
 
-output "cluster_reader_endpoint" {
-  description = "The cluster reader endpoint"
-  value       = aws_rds_cluster.aurora.reader_endpoint
+output "rds_reader_endpoint" {
+  description = "The RDS reader endpoint"
+  value       = aws_rds_cluster.main.reader_endpoint
 }
 
-output "cluster_id" {
-  description = "The ID of the cluster"
-  value       = aws_rds_cluster.aurora.id
-}
-
-output "security_group_id" {
-  description = "The security group ID associated with the RDS cluster"
-  value       = aws_security_group.db_sg.id
+output "rds_port" {
+  description = "The RDS port"
+  value       = aws_rds_cluster.main.port
 }
