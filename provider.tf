@@ -1,8 +1,19 @@
 provider "aws" {
-  region = var.primary_region
+  region = var.region
+  alias  = "primary"
 }
 
 provider "aws" {
-  alias  = "secondary"
-  region = var.secondary_region
+  region = var.backup_region
+  alias  = "backup"
+}
+
+
+terraform {
+  required_providers {
+    aws = {
+      source                = "hashicorp/aws"
+      version               = "5.35.0"
+    }
+  }
 }
